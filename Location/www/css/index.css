@@ -45,9 +45,29 @@ body {
     width:100%;
 }
 
-#mapid
+#map{
+    width: 80%;
+    height: 80vh;
+    margin: auto auto;
+}
+
+.h1{
+    text-align: center;
+}
+
+nav
 {
-    height: 180px;
+  text-align: center;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+nav button {
+  text-decoration: none;
+  background: #333;
+  border-radius: 5px;
+  color: white;
+  padding: 3px 11px;
 }
 
 /* Portrait layout (default) */

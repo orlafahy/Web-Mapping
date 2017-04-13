@@ -17,7 +17,125 @@
  * under the License.
  */
 
-function getPosition() {
+var map;
+var array = [];
+var animalContainer = document.getElementById("animal-info");
+var btn1 = document.getElementById("1");
+var btn2 = document.getElementById("2");
+var btn3 = document.getElementById("3");
+
+btn1.addEventListener("click", function(){
+    var ourRequest = new XMLHttpRequest();
+    ourRequest.open('GET', 'https://raw.githubusercontent.com/orlafahy/Web-Mapping/master/data.json?token=AI1Fm7mimnF7AnjY9kmQMJAfb-B0kIOfks5Y-MVEwA%3D%3D');
+    ourRequest.onload = function() {
+        var ourData = JSON.parse(ourRequest.responseText);
+        renderHTML1(ourData)
+    };
+    ourRequest.send();
+});
+
+btn2.addEventListener("click", function(){
+    var ourRequest = new XMLHttpRequest();
+    ourRequest.open('GET', 'https://raw.githubusercontent.com/orlafahy/Web-Mapping/master/data.json?token=AI1Fm7mimnF7AnjY9kmQMJAfb-B0kIOfks5Y-MVEwA%3D%3D');
+    ourRequest.onload = function() {
+        var ourData = JSON.parse(ourRequest.responseText);
+        renderHTML2(ourData)
+    };
+    ourRequest.send();
+});
+
+btn3.addEventListener("click", function(){
+    var ourRequest = new XMLHttpRequest();
+    ourRequest.open('GET', 'https://raw.githubusercontent.com/orlafahy/Web-Mapping/master/data.json?token=AI1Fm7mimnF7AnjY9kmQMJAfb-B0kIOfks5Y-MVEwA%3D%3D');
+    ourRequest.onload = function() {
+        var ourData = JSON.parse(ourRequest.responseText);
+        renderHTML3(ourData)
+    };
+    ourRequest.send();
+});
+
+function renderHTML1(data)
+{
+    var newlat = [];
+    var newlong = [];
+    var n = 0;
+
+    for(i = 0 ; i < array.length; i++)
+    {
+        map.removeLayer(array[i]);
+    }
+    array = [];
+
+    for(i = 0 ; i < data.length ; i++)
+    {
+        if(data[i].name == "My House1" || data[i].name == "My House2")
+        {
+            newlat = data[i].location.lat;
+            newlong = data[i].location.long;
+            marker = L.marker([newlat, newlong]);
+            array.push(marker);
+            map.addLayer(array[n]);
+            n++;
+        }
+    }
+}
+function renderHTML2(data)
+{
+    var newlat = "";
+    var newlong = "";
+    var n = 0;
+
+   for(i = 0 ; i < array.length; i++)
+   {
+       map.removeLayer(array[i]);
+   }
+
+   array = [];
+
+    for(i = 0 ; i < data.length ; i++)
+    {
+        if(data[i].name == "My House2" || data[i].name == "My House3")
+        {
+            newlat = data[i].location.lat;
+            newlong = data[i].location.long;
+            marker = L.marker([newlat, newlong]).addTo(map);
+            array.push(marker);
+            map.addLayer(array[n]);
+            n++;
+        }
+    }
+}
+
+function renderHTML3(data)
+{
+    var newlat = "";
+    var newlong = "";
+    var n = 0;
+
+   for(i = 0 ; i < array.length; i++)
+   {
+       map.removeLayer(array[i]);
+   }
+
+   array = [];
+
+    for(i = 0 ; i < data.length ; i++)
+    {
+        if(data[i].name == "My House3" || data[i].name == "My House1")
+        {
+            newlat = data[i].location.lat;
+            newlong = data[i].location.long;
+            marker = L.marker([newlat, newlong]).addTo(map);
+            array.push(marker);
+            map.addLayer(array[n]);
+            n++;
+        }
+    }
+}
+
+function getPosition()
+{
+    var data = data;
 
    var options = {
       enableHighAccuracy: true,
@@ -31,30 +149,16 @@ function getPosition() {
       var mylat = position.coords.latitude;
       var mylong = position.coords.longitude;
       // initialize the map
-      var map = L.map('map').setView([mylat, mylong], 17);
+      map = L.map('map').setView([mylat, mylong], 17);
 
-      var marker = L.marker([mylat, mylong]).addTo(map);
-      marker.bindPopup("<b>You Are Here!</b>").openPopup();
-
+      //var marker = L.marker([mylat, mylong]).addTo(map);
+      //marker.bindPopup("<b>You Are Here!</b>").openPopup();
 
       // load a tile layer
       L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       {
          useCache: true
       }).addTo(map);
-
-      // load GeoJSON from an external file
-      $.getJSON("rodents.geojson",function(data){
-          var ratIcon = L.icon({
-              iconUrl: 'http://andywoodruff.com/maptime-leaflet/rat.png',
-              iconSize: [60,50]
-          });
-          L.geoJson(data,{
-              pointToLayer: function(feature,latlng){
-                  return L.marker(latlng,{icon: ratIcon});
-              }
-          }).addTo(map);
-      });
    };
 
    $("#leaflet-copyright").html("Leaflet | Map Tiles &copy; <a href='http://openstreetmap.org'>OpenStreetMap</a> contributors");
@@ -62,18 +166,4 @@ function getPosition() {
    function onError(error) {
       alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
    }
-}
-
-function CreateMap()
-{
-  // initialize the map
-  var map = L.map('map').setView([42.35, -71.08], 13);
-
-  // load a tile layer
-  L.tileLayer('http://tiles.mapc.org/basemap/{z}/{x}/{y}.png',
-    {
-      attribution: 'Tiles by <a href="http://mapc.org">MAPC</a>, Data by <a href="http://mass.gov/mgis">MassGIS</a>',
-      maxZoom: 17,
-      minZoom: 9
-    }).addTo(map);
 }
