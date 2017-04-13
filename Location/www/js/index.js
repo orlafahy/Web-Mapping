@@ -42,6 +42,19 @@ function getPosition() {
       {
          useCache: true
       }).addTo(map);
+
+      // load GeoJSON from an external file
+      $.getJSON("rodents.geojson",function(data){
+          var ratIcon = L.icon({
+              iconUrl: 'http://andywoodruff.com/maptime-leaflet/rat.png',
+              iconSize: [60,50]
+          });
+          L.geoJson(data,{
+              pointToLayer: function(feature,latlng){
+                  return L.marker(latlng,{icon: ratIcon});
+              }
+          }).addTo(map);
+      });
    };
 
    $("#leaflet-copyright").html("Leaflet | Map Tiles &copy; <a href='http://openstreetmap.org'>OpenStreetMap</a> contributors");
