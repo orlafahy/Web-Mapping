@@ -1,9 +1,10 @@
 [
   {
-    "name": "My House",
-    "location": {
-      "lat": [53.286505],
-      "long": [-6.274781]
+    "name": "Meowsy",
+    "species" : "cat",
+    "foods": {
+      "likes": ["tuna", "catnip"],
+      "dislikes": ["ham", "zucchini"]
     }
   },
   {
