@@ -1,20 +1,20 @@
 [
   {
-    "name": "My House",
+    "name": "My House1",
     "location": {
       "lat": 53.286505,
       "long": -6.274781
     }
   },
   {
-    "name": "My House",
+    "name": "My House2",
     "location": {
       "lat": 57.286505,
       "long": -6.274781
     }
   },
   {
-    "name": "My House",
+    "name": "My House3",
     "location": {
       "lat": 50.286505,
       "long": -6.274781
