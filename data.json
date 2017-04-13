@@ -1,26 +1,22 @@
 [
   {
-    "name": "Meowsy",
-    "species" : "cat",
-    "foods": {
-      "likes": ["tuna", "catnip"],
-      "dislikes": ["ham", "zucchini"]
+    "name": "My House",
+    "location": {
+      "lat": [53.286505],
+      "long": [-6.274781]
     }
   },
   {
-    "name": "Barky",
-    "species" : "dog",
-    "foods": {
-      "likes": ["bones", "carrots"],
-      "dislikes": ["tuna"]
+    "name": "My House",
+    "location": {
+      "lat": [57.286505],
+      "long": [-6.274781]
     }
   },
   {
-    "name": "Purrpaws",
-    "species" : "cat",
-    "foods": {
-      "likes": ["mice"],
-      "dislikes": ["cookies"]
+    "name": "My House",
+    "location": {
+      "lat": [50.286505],
+      "long": [-6.274781]
     }
-  }
 ]
