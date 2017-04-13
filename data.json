@@ -2,21 +2,21 @@
   {
     "name": "My House",
     "location": {
-      "lat": [53.286505],
-      "long": [-6.274781]
+      "lat": 53.286505,
+      "long": -6.274781
     }
   },
   {
     "name": "My House",
     "location": {
-      "lat": [57.286505],
-      "long": [-6.274781]
+      "lat": 57.286505,
+      "long": -6.274781
     }
   },
   {
     "name": "My House",
     "location": {
-      "lat": [50.286505],
-      "long": [-6.274781]
+      "lat": 50.286505,
+      "long": -6.274781
     }
 ]
