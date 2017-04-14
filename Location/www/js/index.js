@@ -19,7 +19,6 @@
 
 var map;
 var array = [];
-var animalContainer = document.getElementById("animal-info");
 var btn1 = document.getElementById("1");
 var btn2 = document.getElementById("2");
 var btn3 = document.getElementById("3");
@@ -29,7 +28,8 @@ btn1.addEventListener("click", function(){
     ourRequest.open('GET', 'https://raw.githubusercontent.com/orlafahy/Web-Mapping/master/data.json?token=AI1Fm7mimnF7AnjY9kmQMJAfb-B0kIOfks5Y-MVEwA%3D%3D');
     ourRequest.onload = function() {
         var ourData = JSON.parse(ourRequest.responseText);
-        renderHTML1(ourData)
+        var data = "AIB";
+        renderHTML(ourData, data)
     };
     ourRequest.send();
 });
@@ -39,7 +39,8 @@ btn2.addEventListener("click", function(){
     ourRequest.open('GET', 'https://raw.githubusercontent.com/orlafahy/Web-Mapping/master/data.json?token=AI1Fm7mimnF7AnjY9kmQMJAfb-B0kIOfks5Y-MVEwA%3D%3D');
     ourRequest.onload = function() {
         var ourData = JSON.parse(ourRequest.responseText);
-        renderHTML2(ourData)
+        var data = "BOI";
+        renderHTML(ourData, data)
     };
     ourRequest.send();
 });
@@ -49,15 +50,15 @@ btn3.addEventListener("click", function(){
     ourRequest.open('GET', 'https://raw.githubusercontent.com/orlafahy/Web-Mapping/master/data.json?token=AI1Fm7mimnF7AnjY9kmQMJAfb-B0kIOfks5Y-MVEwA%3D%3D');
     ourRequest.onload = function() {
         var ourData = JSON.parse(ourRequest.responseText);
-        renderHTML3(ourData)
+        var data = "Ulster";
+        renderHTML(ourData, data)
     };
     ourRequest.send();
 });
 
-function renderHTML1(data)
+function renderHTML(data, condition)
 {
-    var newlat = [];
-    var newlong = [];
+    var newlat, newlong;
     var n = 0;
 
     for(i = 0 ; i < array.length; i++)
@@ -68,64 +69,12 @@ function renderHTML1(data)
 
     for(i = 0 ; i < data.length ; i++)
     {
-        if(data[i].name == "My House1" || data[i].name == "My House2")
+        if(data[i].type == condition)
         {
             newlat = data[i].location.lat;
             newlong = data[i].location.long;
             marker = L.marker([newlat, newlong]);
-            array.push(marker);
-            map.addLayer(array[n]);
-            n++;
-        }
-    }
-}
-function renderHTML2(data)
-{
-    var newlat = "";
-    var newlong = "";
-    var n = 0;
-
-   for(i = 0 ; i < array.length; i++)
-   {
-       map.removeLayer(array[i]);
-   }
-
-   array = [];
-
-    for(i = 0 ; i < data.length ; i++)
-    {
-        if(data[i].name == "My House2" || data[i].name == "My House3")
-        {
-            newlat = data[i].location.lat;
-            newlong = data[i].location.long;
-            marker = L.marker([newlat, newlong]).addTo(map);
-            array.push(marker);
-            map.addLayer(array[n]);
-            n++;
-        }
-    }
-}
-
-function renderHTML3(data)
-{
-    var newlat = "";
-    var newlong = "";
-    var n = 0;
-
-   for(i = 0 ; i < array.length; i++)
-   {
-       map.removeLayer(array[i]);
-   }
-
-   array = [];
-
-    for(i = 0 ; i < data.length ; i++)
-    {
-        if(data[i].name == "My House3" || data[i].name == "My House1")
-        {
-            newlat = data[i].location.lat;
-            newlong = data[i].location.long;
-            marker = L.marker([newlat, newlong]).addTo(map);
+            marker.bindPopup("You're At: " + newlat + " " + newlong);
             array.push(marker);
             map.addLayer(array[n]);
             n++;
@@ -135,7 +84,6 @@ function renderHTML3(data)
 
 function getPosition()
 {
-    var data = data;
 
    var options = {
       enableHighAccuracy: true,
@@ -151,8 +99,8 @@ function getPosition()
       // initialize the map
       map = L.map('map').setView([mylat, mylong], 17);
 
-      //var marker = L.marker([mylat, mylong]).addTo(map);
-      //marker.bindPopup("<b>You Are Here!</b>").openPopup();
+      var marker = L.marker([mylat, mylong]).addTo(map);
+      marker.bindPopup("<b>You Are Here!</b>").openPopup();
 
       // load a tile layer
       L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
