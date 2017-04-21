@@ -23,11 +23,12 @@ var btn1 = document.getElementById("1");
 var btn2 = document.getElementById("2");
 var btn3 = document.getElementById("3");
 
-btn1.addEventListener("click", function(){
+btn1.addEventListener("click", function() {
     var ourRequest = new XMLHttpRequest();
-    ourRequest.open('GET', 'https://raw.githubusercontent.com/orlafahy/Web-Mapping/master/data.json?token=AI1Fm7mimnF7AnjY9kmQMJAfb-B0kIOfks5Y-MVEwA%3D%3D');
-    ourRequest.onload = function() {
+    ourRequest.open('GET', 'http://127.0.0.1:8001/atms/?format=json');
+    ourRequest.onload = function () {
         var ourData = JSON.parse(ourRequest.responseText);
+        console.log(ourData);
         var data = "AIB";
         renderHTML(ourData, data)
     };
@@ -36,7 +37,7 @@ btn1.addEventListener("click", function(){
 
 btn2.addEventListener("click", function(){
     var ourRequest = new XMLHttpRequest();
-    ourRequest.open('GET', 'https://raw.githubusercontent.com/orlafahy/Web-Mapping/master/data.json?token=AI1Fm7mimnF7AnjY9kmQMJAfb-B0kIOfks5Y-MVEwA%3D%3D');
+    ourRequest.open('GET', 'http://127.0.0.1:8001/atms/?format=json');
     ourRequest.onload = function() {
         var ourData = JSON.parse(ourRequest.responseText);
         var data = "BOI";
@@ -47,7 +48,7 @@ btn2.addEventListener("click", function(){
 
 btn3.addEventListener("click", function(){
     var ourRequest = new XMLHttpRequest();
-    ourRequest.open('GET', 'https://raw.githubusercontent.com/orlafahy/Web-Mapping/master/data.json?token=AI1Fm7mimnF7AnjY9kmQMJAfb-B0kIOfks5Y-MVEwA%3D%3D');
+    ourRequest.open('GET', 'http://127.0.0.1:8001/atms/?format=json');
     ourRequest.onload = function() {
         var ourData = JSON.parse(ourRequest.responseText);
         var data = "Ulster";
@@ -71,8 +72,8 @@ function renderHTML(data, condition)
     {
         if(data[i].type == condition)
         {
-            newlat = data[i].location.lat;
-            newlong = data[i].location.long;
+            newlat = data[i].latitudes;
+            newlong = data[i].longitudes;
             marker = L.marker([newlat, newlong]);
             marker.bindPopup("You're At: " + newlat + " " + newlong);
             array.push(marker);
