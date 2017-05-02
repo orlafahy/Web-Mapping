@@ -25,6 +25,7 @@ SECRET_KEY = '88ckz6cg&cezpf6^@i58wd2j&!ft13dmc$nsi_r^+b9$yghz6!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+#Add aws IP address
 ALLOWED_HOSTS = []
 
 
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django.contrib.staticfiles',
     'corsheaders',
+    'django.contrib.gis',
     'api',
 ]
 

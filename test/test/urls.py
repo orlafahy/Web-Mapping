@@ -14,14 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-from api.models import ATM
+from api.models import ATM, Users, atm1
 from rest_framework import serializers, viewsets, routers
 
 # Serializers define the API representation.
 class ATMSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ATM
-        fields = ('url', 'name', 'type', 'latitudes', 'longitudes', 'extra')
+        fields = ('url', 'name', 'type', 'latitudes', 'longitudes', 'extras')
+
+class UsersSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Users
+        fields = ('url', 'name', 'email', 'password')
+
+class atm1Serializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = atm1
+        fields = ('url', 'name', 'type', 'latitudes', 'longitudes', 'one', 'two', 'three')
 
 
 # ViewSets define the view behavior.
@@ -29,10 +39,20 @@ class ATMViewSet(viewsets.ModelViewSet):
     queryset = ATM.objects.all()
     serializer_class = ATMSerializer
 
+class UsersViewSet(viewsets.ModelViewSet):
+    queryset = Users.objects.all()
+    serializer_class = UsersSerializer
+
+class atm1ViewSet(viewsets.ModelViewSet):
+    queryset = atm1.objects.all()
+    serializer_class = atm1Serializer
+
 
 # Routers provide a way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'atms', ATMViewSet)
+router.register(r'users', UsersViewSet)
+router.register(r'atm', atm1ViewSet)
 
 
 # Wire up our API using automatic URL routing.
